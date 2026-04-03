@@ -13,19 +13,18 @@ import {
 
 const textureLoader = new THREE.TextureLoader();
 const imageUrls = [
-  "/images/AWS.png",
-  "/images/QGIS.png",
-  "/images/SPYDER.png",
-  "/images/r_logo.svg",
-  "/images/tableau.svg",
-  "/images/node2.webp",
-  "/images/EXCEL.png",
-  "/images/SQL.png",
-  "/images/PYTHON.png",
-  "/images/mongo.webp",
-  "/images/mysql.webp",
-  "/images/typescript.webp",
-  "/images/javascript.webp",
+  "/images/AWS.png",       // Matches folder
+  "/images/QGIS.png",      // Matches folder
+  "/images/SPYDER.png",    // Matches folder
+  "/images/r_logo.png",    // FIXED: Folder shows .png (Edge icon), not .svg
+  "/images/Tableau.png",   // FIXED: Folder has Capital 'T' and is a .png
+  "/images/node2.png",     // FIXED: Likely .png based on your file icons
+  "/images/EXCEL.png",     // Matches folder
+  "/images/SQL.png",       // Matches folder
+  "/images/PYTHON.png",    // Matches folder
+  "/images/mongo.png",     // FIXED: Folder icon looks like .png
+  "/images/mysql.png",     // FIXED: Folder icon looks like .png
+  "/images/javascript.png" // FIXED: Folder icon looks like .png
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
