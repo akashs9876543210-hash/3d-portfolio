@@ -2,6 +2,8 @@
 
 This repository contains the source code for a personal 3D portfolio built with React, TypeScript, Three.js, React Three Fiber, and GSAP. It includes animated page sections, a character scene, custom cursor interactions, and smooth transitions designed for a modern portfolio experience.
 
+Live site: [https://akashrmalhotra.netlify.app/](https://akashrmalhotra.netlify.app/)
+
 ![Portfolio Preview](public/images/preview1.png)
 
 ## Table of Contents
@@ -122,11 +124,10 @@ This repository contains the source code for a personal 3D portfolio built with 
 
 ## GSAP License Note
 
-This project currently uses `gsap-trial` for Club GreenSock plugins.
+This project uses the standard `gsap` package, including bonus plugins now available in the core package.
 
-- `gsap-trial` is suitable for development and evaluation.
-- Trial Club plugins are not intended for unrestricted production hosting.
-- For production/commercial use, install licensed Club GSAP packages.
+- Install dependencies with `npm install`.
+- If migrating from older setups, remove `gsap-trial` from your project.
 
 Read official installation guidance here: [GSAP Installation Docs](https://gsap.com/docs/v3/Installation/)
 
