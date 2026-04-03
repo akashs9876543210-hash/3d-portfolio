@@ -13,18 +13,17 @@ import {
 
 const textureLoader = new THREE.TextureLoader();
 const imageUrls = [
-  "/images/AWS.png",       // Matches folder
-  "/images/QGIS.png",      // Matches folder
-  "/images/SPYDER.png",    // Matches folder
-  "/images/r_logo.png",    // FIXED: Folder shows .png (Edge icon), not .svg
-  "/images/Tableau.png",   // FIXED: Folder has Capital 'T' and is a .png
-  "/images/node2.png",     // FIXED: Likely .png based on your file icons
-  "/images/EXCEL.png",     // Matches folder
-  "/images/SQL.png",       // Matches folder
-  "/images/PYTHON.png",    // Matches folder
-  "/images/mongo.png",     // FIXED: Folder icon looks like .png
-  "/images/mysql.png",     // FIXED: Folder icon looks like .png
-  "/images/javascript.png" // FIXED: Folder icon looks like .png
+  "/images/AWS.png",       // Matches GitHub
+  "/images/EXCEL.png",     // Matches GitHub
+  "/images/IOT.png",       // Matches GitHub
+  "/images/SQL.png",       // Check if this is caps on GitHub
+  "/images/PYTHON.png",    // Check if this is caps on GitHub
+  "/images/QGIS.png",      // Check if this is caps on GitHub
+  "/images/SPYDER.png",    // Check if this is caps on GitHub
+  "/images/Tableau.png",   // Check if this is 'Tableau.png' or 'TABLEAU.png'
+  "/images/r_logo.png",    // Ensure extension is .png, not .svg
+  "/images/mysql.png",     // Check if this is lowercase or caps
+  "/images/javascript.png" // Check if this is lowercase or caps
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
