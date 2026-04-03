@@ -15,15 +15,17 @@ const textureLoader = new THREE.TextureLoader();
 const imageUrls = [
   "/images/AWS.png",       // Matches GitHub
   "/images/EXCEL.png",     // Matches GitHub
+  "/images/SQL.png",       // Matches GitHub
+  "/images/PYTHON.png",    // Matches GitHub
+  "/images/QGIS.png",      // Matches GitHub
+  "/images/SPYDER.png",    // Matches GitHub
   "/images/IOT.png",       // Matches GitHub
-  "/images/SQL.png",       // Check if this is caps on GitHub
-  "/images/PYTHON.png",    // Check if this is caps on GitHub
-  "/images/QGIS.png",      // Check if this is caps on GitHub
-  "/images/SPYDER.png",    // Check if this is caps on GitHub
-  "/images/Tableau.png",   // Check if this is 'Tableau.png' or 'TABLEAU.png'
-  "/images/r_logo.png",    // Ensure extension is .png, not .svg
-  "/images/mysql.png",     // Check if this is lowercase or caps
-  "/images/javascript.png" // Check if this is lowercase or caps
+  "/images/Tableau.png",   // FIXED: Check if T is capital on GitHub
+  "/images/r_logo.png",    // FIXED: Your folder uses .png, not .svg
+  "/images/mysql.png",     // Matches folder
+  "/images/mongo.png",     // Matches folder
+  "/images/node2.png",     // Matches folder
+  "/images/javascript.png" // Matches folder
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
