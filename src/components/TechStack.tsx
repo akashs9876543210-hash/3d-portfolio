@@ -7,11 +7,10 @@ import {
   BallCollider,
   Physics,
   RigidBody,
-  CylinderCollider,
   RapierRigidBody,
 } from "@react-three/rapier";
 
-// 1. Helper Components (Defined outside so TechStack can see them)
+// 1. Helper Components
 function SphereGeo({ vec = new THREE.Vector3(), scale, material, isActive }: any) {
   const api = useRef<RapierRigidBody | null>(null);
   useFrame((_state, delta) => {
@@ -34,7 +33,7 @@ function SphereGeo({ vec = new THREE.Vector3(), scale, material, isActive }: any
       colliders={false}
     >
       <BallCollider args={[scale]} />
-      <mesh castShadow receiveShadow scale={scale} material={material} />
+      <mesh castShadow receiveShadow scale={scale} geometry={new THREE.SphereGeometry(1, 28, 28)} material={material} />
     </RigidBody>
   );
 }
@@ -60,6 +59,7 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: { vec?: THREE.Vector3;
 const TechStack = () => {
   const [isActive, setIsActive] = useState(false);
 
+  // Matches your GitHub filenames exactly
   const textures = useTexture([
     "/images/AWS.png",
     "/images/EXCEL.png",
@@ -111,11 +111,7 @@ const TechStack = () => {
   return (
     <div className="techstack" id="tech-stack">
       <h2>My Techstack</h2>
-      <Canvas
-        shadows
-        camera={{ position: [0, 0, 20], fov: 32.5 }}
-        className="tech-canvas"
-      >
+      <Canvas shadows camera={{ position: [0, 0, 20], fov: 32.5 }} className="tech-canvas">
         <Suspense fallback={null}>
           <ambientLight intensity={1} />
           <spotLight position={[20, 20, 25]} penumbra={1} castShadow />
@@ -140,5 +136,4 @@ const TechStack = () => {
   );
 };
 
-// 3. The CRITICAL Export (Fixes the 'default' error)
 export default TechStack;
