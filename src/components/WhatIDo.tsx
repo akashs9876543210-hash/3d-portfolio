@@ -87,20 +87,23 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>AI & AUTOMATION</h3>
-              <h4>Workflow Intelligence for Organizations</h4>
+              <h3>Precision Agriculture</h3>
+              <h4>Data-driven crop insights</h4>
               <p>
-                AI specialist helping organizations automate workflows—internal ops
-                and customer-facing—so teams ship faster with less manual work.
+                Applying machine learning and data science to plant biology and
+                agri-data to support precision farming, yield modelling, and crop
+                health analytics.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">LLMs &amp; agents</div>
-                <div className="what-tags">Workflow design</div>
-                <div className="what-tags">RAG &amp; retrieval</div>
-                <div className="what-tags">Evals &amp; guardrails</div>
-                <div className="what-tags">Integrations</div>
-                <div className="what-tags">Product strategy</div>
+                <div className="what-tags">Python</div>
+                <div className="what-tags">R</div>
+                <div className="what-tags">Machine Learning</div>
+                <div className="what-tags">QGIS</div>
+                <div className="what-tags">Spatial Analysis</div>
+                <div className="what-tags">SQL & VBA</div>
+                <div className="what-tags">Tableau</div>
+                <div className="what-tags">AWS Cloud</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -124,21 +127,23 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>BUILD &amp; SCALE</h3>
-              <h4>Shipping AI in Production</h4>
+              <h3>Data Analysis & Mapping</h3>
+              <h4>Spatial & statistical workflows</h4>
               <p>
-                I build the systems behind it: APIs, data, voice/real-time, and
-                full-stack products—production-ready, not slide decks.
+                End-to-end data analysis pipelines: preprocessing, statistical
+                modelling, and spatial mapping to generate actionable insights for
+                agronomy and research.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">Python</div>
-                <div className="what-tags">REST &amp; real-time APIs</div>
-                <div className="what-tags">PostgreSQL</div>
-                <div className="what-tags">MongoDB</div>
-                <div className="what-tags">React</div>
-                <div className="what-tags">Cloud &amp; infra</div>
+                <div className="what-tags">Python (pandas, scikit-learn)</div>
+                <div className="what-tags">R (tidyverse)</div>
+                <div className="what-tags">QGIS & geoprocessing</div>
+                <div className="what-tags">SQL (Postgres/Spatial)</div>
+                <div className="what-tags">Data pipelines</div>
+                <div className="what-tags">VBA (scripting)</div>
+                <div className="what-tags">Tableau</div>
+                <div className="what-tags">AWS Cloud</div>
               </div>
               <div className="what-arrow"></div>
             </div>

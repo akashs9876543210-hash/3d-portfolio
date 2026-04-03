@@ -13,16 +13,23 @@ import {
 
 const textureLoader = new THREE.TextureLoader();
 const imageUrls = [
-  "/images/react2.webp",
-  "/images/next2.webp",
+  "/images/AWS.png",
+  "/images/QGIS.png",
+  "/images/SPYDER.png",
+  "/images/r_logo.svg",
+  "/images/tableau.svg",
   "/images/node2.webp",
-  "/images/express.webp",
+  "/images/EXCEL.png",
+  "/images/SQL.png",
+  "/images/PYTHON.png",
   "/images/mongo.webp",
   "/images/mysql.webp",
   "/images/typescript.webp",
   "/images/javascript.webp",
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
+
+// textures are loaded above; per-texture tuning removed for QGIS (no longer used)
 
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
 
@@ -152,18 +159,29 @@ const TechStack = () => {
     };
   }, []);
   const materials = useMemo(() => {
-    return textures.map(
-      (texture) =>
-        new THREE.MeshPhysicalMaterial({
-          map: texture,
+    return textures.map((texture) => {
+      const hasImage = !!texture && !!(texture as any).image;
+      if (!hasImage) {
+        return new THREE.MeshPhysicalMaterial({
+          color: "#ffffff",
           emissive: "#ffffff",
-          emissiveMap: texture,
-          emissiveIntensity: 0.3,
-          metalness: 0.5,
+          emissiveIntensity: 0.15,
+          metalness: 0.05,
           roughness: 1,
-          clearcoat: 0.1,
-        })
-    );
+          clearcoat: 0.0,
+        });
+      }
+
+      return new THREE.MeshPhysicalMaterial({
+        map: texture,
+        emissive: "#ffffff",
+        emissiveMap: texture,
+        emissiveIntensity: 0.3,
+        metalness: 0.5,
+        roughness: 1,
+        clearcoat: 0.1,
+      });
+    });
   }, []);
 
   return (
@@ -189,14 +207,36 @@ const TechStack = () => {
         <directionalLight position={[0, 5, -4]} intensity={2} />
         <Physics gravity={[0, 0, 0]}>
           <Pointer isActive={isActive} />
-          {spheres.map((props, i) => (
-            <SphereGeo
-              key={i}
-              {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
-              isActive={isActive}
-            />
-          ))}
+          {
+            // Ensure SPYDER logo appears on only two spheres
+            (() => {
+              const spyderIndex = imageUrls.findIndex((u) =>
+                u.toLowerCase().includes("spyder")
+              );
+              const nonSpyderMaterials = materials.filter((_, idx) => idx !== spyderIndex);
+
+              // choose two unique random positions for spyder
+              const spyPositions = new Set<number>();
+              while (spyPositions.size < 2 && spyPositions.size < spheres.length) {
+                spyPositions.add(Math.floor(Math.random() * spheres.length));
+              }
+
+              return spheres.map((props, i) => {
+                const mat = spyPositions.has(i) && spyderIndex !== -1
+                  ? materials[spyderIndex]
+                  : nonSpyderMaterials[Math.floor(Math.random() * nonSpyderMaterials.length)];
+
+                return (
+                  <SphereGeo
+                    key={i}
+                    {...props}
+                    material={mat}
+                    isActive={isActive}
+                  />
+                );
+              });
+            })()
+          }
         </Physics>
         <Environment
           files="/models/char_enviorment.hdr"
