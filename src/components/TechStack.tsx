@@ -1,11 +1,65 @@
+import * as THREE from "three";
+import { useRef, useMemo, useState, useEffect, Suspense } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useTexture, Environment } from "@react-three/drei";
+import { EffectComposer, N8AO } from "@react-three/postprocessing";
+import {
+  BallCollider,
+  Physics,
+  RigidBody,
+  CylinderCollider,
+  RapierRigidBody,
+} from "@react-three/rapier";
 
-import { useTexture, Environment } from "@react-three/drei"; // Add useTexture here
-import { Suspense } from "react"; // Add Suspense
+// 1. Helper Components (Defined outside so TechStack can see them)
+function SphereGeo({ vec = new THREE.Vector3(), scale, material, isActive }: any) {
+  const api = useRef<RapierRigidBody | null>(null);
+  useFrame((_state, delta) => {
+    if (!isActive || !api.current) return;
+    const impulse = vec
+      .copy(api.current.translation())
+      .normalize()
+      .multiply(new THREE.Vector3(-50 * delta * scale, -150 * delta * scale, -50 * delta * scale));
+    api.current.applyImpulse(impulse, true);
+  });
+
+  const r = THREE.MathUtils.randFloatSpread;
+  return (
+    <RigidBody
+      linearDamping={0.75}
+      angularDamping={0.15}
+      friction={0.2}
+      position={[r(20), r(20) - 25, r(20) - 10]}
+      ref={api}
+      colliders={false}
+    >
+      <BallCollider args={[scale]} />
+      <mesh castShadow receiveShadow scale={scale} material={material} />
+    </RigidBody>
+  );
+}
+
+function Pointer({ vec = new THREE.Vector3(), isActive }: { vec?: THREE.Vector3; isActive: boolean }) {
+  const ref = useRef<RapierRigidBody>(null);
+  useFrame(({ pointer, viewport }) => {
+    if (!isActive) return;
+    const targetVec = vec.lerp(
+      new THREE.Vector3((pointer.x * viewport.width) / 2, (pointer.y * viewport.height) / 2, 0),
+      0.2
+    );
+    ref.current?.setNextKinematicTranslation(targetVec);
+  });
+  return (
+    <RigidBody position={[100, 100, 100]} type="kinematicPosition" colliders={false} ref={ref}>
+      <BallCollider args={[2]} />
+    </RigidBody>
+  );
+}
+
+// 2. Main Component
 const TechStack = () => {
   const [isActive, setIsActive] = useState(false);
 
-  // 1. Move the loader INSIDE the component using the Drei hook
-  // This hook "suspends" the component until all images are 100% loaded.
   const textures = useTexture([
     "/images/AWS.png",
     "/images/EXCEL.png",
@@ -22,12 +76,9 @@ const TechStack = () => {
     "/images/javascript.png"
   ]);
 
-  // 2. Create materials directly from the loaded textures
   const materials = useMemo(() => {
     return textures.map((texture) => {
-      // Set texture settings for better quality on spheres
       texture.anisotropy = 16;
-
       return new THREE.MeshPhysicalMaterial({
         map: texture,
         emissive: "#ffffff",
@@ -40,25 +91,54 @@ const TechStack = () => {
     });
   }, [textures]);
 
+  const spheres = useMemo(() => [...Array(30)].map(() => ({
+    scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
+  })), []);
+
   useEffect(() => {
-    // ... (Keep your scroll/isActive logic exactly as it is)
+    const handleScroll = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      const element = document.getElementById("work");
+      if (element) {
+        const threshold = element.getBoundingClientRect().top;
+        setIsActive(scrollY > threshold);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div className="techstack">
-      <h2> My Techstack</h2>
-      <Canvas /* ... keep your canvas props ... */ >
-        {/* 3. Wrap everything in Suspense so the site doesn't crash while loading */}
+    <div className="techstack" id="tech-stack">
+      <h2>My Techstack</h2>
+      <Canvas
+        shadows
+        camera={{ position: [0, 0, 20], fov: 32.5 }}
+        className="tech-canvas"
+      >
         <Suspense fallback={null}>
           <ambientLight intensity={1} />
-          {/* ... rest of your lights and physics ... */}
+          <spotLight position={[20, 20, 25]} penumbra={1} castShadow />
           <Physics gravity={[0, 0, 0]}>
             <Pointer isActive={isActive} />
-            {/* ... keep your Sphere mapping logic ... */}
+            {spheres.map((props, i) => (
+              <SphereGeo
+                key={i}
+                {...props}
+                material={materials[i % materials.length]}
+                isActive={isActive}
+              />
+            ))}
           </Physics>
           <Environment files="/models/char_enviorment.hdr" />
+          <EffectComposer enableNormalPass={false}>
+            <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
+          </EffectComposer>
         </Suspense>
       </Canvas>
     </div>
   );
 };
+
+// 3. The CRITICAL Export (Fixes the 'default' error)
+export default TechStack;
