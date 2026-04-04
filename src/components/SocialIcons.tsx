@@ -1,12 +1,15 @@
 import { FaLinkedinIn } from "react-icons/fa";
 import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import HoverLinks from "./HoverLinks";
 
 const SocialIcons = () => {
+  const socialRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const social = document.getElementById("social") as HTMLElement;
+    const social = socialRef.current;
+    if (!social) return;
 
     social.querySelectorAll("span").forEach((item) => {
       const elem = item as HTMLElement;
@@ -53,7 +56,7 @@ const SocialIcons = () => {
 
   return (
     <div className="icons-section">
-      <div className="social-icons" data-cursor="icons" id="social">
+      <div className="social-icons" data-cursor="icons" id="social" ref={socialRef}>
         <span>
           <a
             href="https://www.linkedin.com/in/akash-subbaiah-a5739838b/"

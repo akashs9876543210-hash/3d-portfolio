@@ -6,7 +6,8 @@ const Cursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     let hover = false;
-    const cursor = cursorRef.current!;
+    const cursor = cursorRef.current;
+    if (!cursor) return;
     const mousePos = { x: 0, y: 0 };
     const cursorPos = { x: 0, y: 0 };
     document.addEventListener("mousemove", (e) => {

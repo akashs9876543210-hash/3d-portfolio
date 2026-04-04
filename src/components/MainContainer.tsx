@@ -9,6 +9,7 @@ import SocialIcons from "./SocialIcons";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import setSplitText from "./utils/splitText";
+import ErrorBoundary from "./ErrorBoundary";
 
 const TechStack = lazy(() => import("./TechStack"));
 
@@ -19,7 +20,11 @@ const MainContainer = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     const resizeHandler = () => {
-      setSplitText();
+      try {
+        setSplitText();
+      } catch (error) {
+        console.warn("splitText error:", error);
+      }
       setIsDesktopView(window.innerWidth > 1024);
     };
     resizeHandler();
@@ -30,29 +35,31 @@ const MainContainer = ({ children }: PropsWithChildren) => {
   }, [isDesktopView]);
 
   return (
-    <div className="container-main">
-      <Cursor />
-      <Navbar />
-      <SocialIcons />
-      {isDesktopView && children}
-      <div id="smooth-wrapper">
-        <div id="smooth-content">
-          <div className="container-main">
-            <Landing>{!isDesktopView && children}</Landing>
-            <About />
-            <WhatIDo />
-            <Career />
-            <Work />
-            {isDesktopView && (
-              <Suspense fallback={<div>Loading....</div>}>
-                <TechStack />
-              </Suspense>
-            )}
-            <Contact />
+    <ErrorBoundary>
+      <div className="container-main">
+        <Cursor />
+        <Navbar />
+        <SocialIcons />
+        {isDesktopView && children}
+        <div id="smooth-wrapper">
+          <div id="smooth-content">
+            <div className="container-main">
+              <Landing>{!isDesktopView && children}</Landing>
+              <About />
+              <WhatIDo />
+              <Career />
+              <Work />
+              {isDesktopView && (
+                <Suspense fallback={<div>Loading....</div>}>
+                  <TechStack />
+                </Suspense>
+              )}
+              <Contact />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ErrorBoundary>
   );
 };
 
