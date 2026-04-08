@@ -12,7 +12,7 @@ import setSplitText from "./utils/splitText";
 import ErrorBoundary from "./ErrorBoundary";
 
 const TechStack = lazy(() => import("./TechStack"));
-
+const Hobbies = lazy(() => import("./Hobbies"));
 const MainContainer = ({ children }: PropsWithChildren) => {
   const [isDesktopView, setIsDesktopView] = useState<boolean>(
     window.innerWidth > 1024
@@ -51,8 +51,11 @@ const MainContainer = ({ children }: PropsWithChildren) => {
               <Work />
               {isDesktopView && (
                 <Suspense fallback={<div>Loading....</div>}>
-                  <TechStack />
-                </Suspense>
+                  <Suspense fallback={null}>
+                    <TechStack />
+                    <Hobbies />
+                  </Suspense>
+                </Suspense> // <-- This was the missing one!
               )}
               <Contact />
             </div>
