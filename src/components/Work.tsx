@@ -5,10 +5,12 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
-    title: "Agricultural Yield Analysis",
-    category: "Statistical Analysis",
-    tools: "Python, R, pandas, tidyverse, scikit-learn",
-    image: "/images/Agricultural yield analysis.png",
+    title: "The TB Micro-Data Lab",
+    category: "WHO ICMR-NIRT — Clinical Data Management",
+    // We move the humorous description here so it's visible!
+    tools: "CBNAAT, Data Entry, Participant Screening, Germ Hunting",
+    description: "I spent my time at the WHO ICMR-NIRT centre hunting Mycobacterium tuberculosis. I managed high-stakes data and ran CBNAAT tests—basically a high-stakes game of 'Where’s Waldo' with germs. If a bacterium was hiding, I found it (and recorded it in the database).",
+    image: "/images/icmr_lab.png",
     link: "https://github.com/akash-subbaiah"
   },
   {

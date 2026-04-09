@@ -3,12 +3,12 @@ import React from 'react';
 const hobbies = [
     {
         title: "Culinary Arts",
-        description: "Experimenting with South Indian spices and classic French techniques. I love blending flavors from home with local French ingredients.",
+        description: "Experimenting with South Indian spices and classic French dishes. I love blending flavors from home with local French ingredients.",
         icon: "🍳"
     },
     {
         title: "Plant Biotechnology",
-        description: "Beyond my studies, I enjoy staying updated on the latest in plant biology and sustainable precision agriculture.",
+        description: "Beyond my studies, I enjoy staying updated on the latest Agri News  and sustainable precision agriculture.",
         icon: "🌱"
     },
     {
