@@ -7,7 +7,7 @@ const projects = [
   {
     title: "The TB Micro-Data Lab",
     category: "WHO ICMR-NIRT — Clinical Data Management",
-    // We move the humorous description here so it's visible!
+    // 
     tools: "CBNAAT, Data Entry, Participant Screening, Germ Hunting",
     description: "I spent my time at the WHO ICMR-NIRT centre hunting Mycobacterium tuberculosis. I managed high-stakes data and ran CBNAAT tests—basically a high-stakes game of 'Where’s Waldo' with germs. If a bacterium was hiding, I found it (and recorded it in the database).",
     image: "/images/icmr_lab.png",
